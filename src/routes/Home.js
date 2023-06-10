@@ -2,8 +2,11 @@ import { useState } from "react";
 import { add } from "../store";
 import ToDo from "../components/ToDo";
 import { useSelector, useDispatch } from "react-redux";
-
+import UseRefExample from "../components/UseRefExample";
+import DefaultPropsExample from "../components/DefaultPropsExample";
+import UseEffectExample from "../components/UseEffectExample";
 function Home () {
+    const [visible, setVisible] = useState(false);
     const [text, setText] = useState("");
     const toDos = useSelector(state => state)
     const dispatch = useDispatch()
@@ -28,6 +31,15 @@ function Home () {
                     <ToDo {...toDo} key={toDo.id}/>
                 ))}
             </ul>
+            <UseRefExample/>
+            <DefaultPropsExample name={3}/>
+            <div>
+                {visible && <UseEffectExample/>}
+                <button onClick = {() => setVisible(!visible)}>
+                    {visible ? '숨김' : '보임'}
+                </button>
+            </div>
+            
         </>
     )
 }
